@@ -1,0 +1,15 @@
+#calendar-layout span {
+    display: inline-block;
+    width: 100%;
+}
+
+#calendar-layout span:first-child {
+    text-align: right;
+}
+
+.calendar-layout-date:nth-child(n)  {
+    border-radius: 15%;
+    border-right: 5px solid;
+    border-bottom: 5px solid;
+    margin: 5px;
+}

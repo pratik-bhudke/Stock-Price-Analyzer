@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h2 class="text-center text-muted">Configuration</h2>
+      </div>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="sampleDataToggle" (change)="sampleDataToggle($event.target.checked)" checked>
+          <label class="form-check-label" for="sampleDataToggle" *ngIf="isSample">Sample Data</label>
+          <label class="form-check-label" for="sampleDataToggle" *ngIf="!isSample">Real Data</label>
+        </div>
+
+        <br />
+
+        <div class="form-group" *ngIf="!isSample">
+          <label for="file">Choose File</label>
+          <input type="file" id="file" (change)="handleFileInput($event.target.files)" class="form-control" />
+        </div>
+
+        <br />
+
+        <div class="form-group" *ngIf="!isSample">
+          <label for="dateTimeType">Date - Time Format</label>
+          <select id="dateTimeType" class="form-control">
+            <option>Date only (dd/MM/yyyy)</option>
+            <option>Time only (hh:mm:ss)</option>
+            <option selected>Date-Time (dd/MM/yyyy hh:mm:ss)</option>
+          </select>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container" *ngIf="isSample || fileToUpload != null">
+  <div class="row">
+      <div class="col-md-12 text-center">
+          <h3>
+              <a routerLink="/analysis">Analyse</a>
+          </h3>
+      </div>
+  </div>
+</div>
