@@ -8,6 +8,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './shared/header/header.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HeaderComponent } from './shared/header/header.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

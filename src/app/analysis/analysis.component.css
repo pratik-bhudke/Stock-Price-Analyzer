@@ -5,6 +5,11 @@
 
 #calendar-layout span:first-child {
     text-align: right;
+    color: var(--bs-dark);
+}
+
+#calendar-layout span:last-child {
+    color: var(--bs-dark);
 }
 
 .calendar-layout-date:nth-child(n)  {

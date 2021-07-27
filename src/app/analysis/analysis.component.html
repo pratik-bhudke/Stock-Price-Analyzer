@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center text-muted">Analysis</h2>
+            <h2 class="text-center text-muted">Visualization</h2>
         </div>
     </div>
 </div>
@@ -19,6 +19,33 @@
 </div>
 
 <hr *ngIf="info != null">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <google-chart #chart  
+                [type]="type"  
+                [data]="chartData"  
+                [columns]="columnNames"  
+                [width]="width" 
+                [height]="height" 
+                [options]="options">  
+            </google-chart>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center text-muted">Analysis</h2>
+        </div>
+    </div>
+</div>
+
+<hr>
 
 <div class="container">
     <div class="row">

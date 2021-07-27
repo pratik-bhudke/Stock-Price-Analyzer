@@ -8,6 +8,33 @@ import { data } from '../../assets/data/sample-data.json'
   styleUrls: ['./analysis.component.css']
 })
 export class AnalysisComponent implements OnInit {
+  type = 'LineChart';
+  chartData = [];
+  columnNames = ['Date', 'Value'];
+  options = {
+    hAxis: {
+      format: 'd/M/yy',
+      gridlines: {minSpacing: 5}
+    },
+    vAxis: {
+      gridlines: {color: 'none'}
+    },
+    legend: 'none',
+    selectionMode: 'multiple',
+    curveType: 'function',
+    explorer: {},
+    crosshair: { 
+      trigger: 'both' 
+    },
+    animation: {
+      duration: 1500,
+      easing: 'out',
+      startup: true
+    }
+  };
+  width = '100%';
+  height = 500;
+  
   info: any;
   data: any;
 
@@ -84,8 +111,8 @@ export class AnalysisComponent implements OnInit {
 
   dataValueStructure: any = {};
 
-  monthHighValueStructure: any = Object.assign({}, this.monthStructure);
-  monthLowValueStructure: any = Object.assign({}, this.monthStructure);
+  monthHighValueStructure: any = JSON.parse(JSON.stringify(this.monthStructure));
+  monthLowValueStructure: any = JSON.parse(JSON.stringify(this.monthStructure));
 
   constructor() {
     this.info = info;
@@ -101,6 +128,7 @@ export class AnalysisComponent implements OnInit {
     this.calculateFinalMonthlyValues();
     this.displayHighLowValues();
     this.displayHighestLowestValues();
+    this.initChart();
   }
 
   initDataStructure(data: any) {
@@ -108,8 +136,8 @@ export class AnalysisComponent implements OnInit {
       var date = new Date(element.datetime);
       var year = date.getFullYear();
       if(this.dataStructure[year] == null) {
-        this.dataStructure[year] = Object.assign({}, this.yearStructure);
-        this.dataValueStructure[year] = Object.assign({}, this.yearValueStructure);
+        this.dataStructure[year] = JSON.parse(JSON.stringify(this.yearStructure));
+        this.dataValueStructure[year] = JSON.parse(JSON.stringify(this.yearValueStructure));
       }
       var month = date.getMonth() + 1;
       var dayOfMonth = date.getDate();
@@ -152,8 +180,12 @@ export class AnalysisComponent implements OnInit {
   calculateFinalMonthlyValues() {
     Object.keys(this.dataValueStructure).forEach(year => {
       Object.keys(this.dataValueStructure[year]).forEach(month => {
-        this.monthHighValueStructure[this.dataValueStructure[year][month]["highest"]]++;
-        this.monthLowValueStructure[this.dataValueStructure[year][month]["lowest"]]++;
+        if(this.dataValueStructure[year][month]["highest"] !== 0) {
+          this.monthHighValueStructure[this.dataValueStructure[year][month]["highest"]]++;
+        }
+        if(this.dataValueStructure[year][month]["lowest"] !== 0) {
+          this.monthLowValueStructure[this.dataValueStructure[year][month]["lowest"]]++;
+        }
       });
     });
   }
@@ -207,8 +239,20 @@ export class AnalysisComponent implements OnInit {
       document.querySelector("#date" + highest_date).classList.add("text-warning");
       document.querySelector("#date" + lowest_date).classList.add("text-warning");
     }
+    document.querySelector("#date" + highest_date + " span:nth-child(2)").innerHTML = "<b>" + highest_date + "</b>";
+    document.querySelector("#date" + lowest_date + " span:nth-child(2)").innerHTML = "<b>" + lowest_date + "</b>";
+  }
 
-    
+  initChart() {
+    Object.keys(this.dataStructure).forEach(year => {
+      Object.keys(this.dataStructure[year]).forEach(month => {
+        Object.keys(this.dataStructure[year][month]).forEach(dayOfMonth => {
+          if(this.dataStructure[year][month][dayOfMonth] !== 0) {
+            this.chartData.push([new Date(Number(year), Number(month)-1, Number(dayOfMonth)), Number(this.dataStructure[year][month][dayOfMonth])]);
+          }
+        });
+      });
+    });
   }
 
 }
