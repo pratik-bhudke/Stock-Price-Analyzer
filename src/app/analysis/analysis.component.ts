@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { info } from '../../assets/data/sample-data.json';
-import { data } from '../../assets/data/sample-data.json'
+import { DataManagementService } from '../shared/services/data-management.service';
 
 @Component({
   selector: 'app-analysis',
@@ -114,15 +113,12 @@ export class AnalysisComponent implements OnInit {
   monthHighValueStructure: any = JSON.parse(JSON.stringify(this.monthStructure));
   monthLowValueStructure: any = JSON.parse(JSON.stringify(this.monthStructure));
 
-  constructor() {
-    this.info = info;
-    this.data = data;
+  constructor(private dataManagementService: DataManagementService) {
+    this.info = dataManagementService.info;
+    this.data = dataManagementService.data;
   }
 
   ngOnInit(): void {
-    console.log(info);
-    console.log(data);
-
     this.initDataStructure(this.data);
     this.calculateMonthlyHighLow();
     this.calculateFinalMonthlyValues();

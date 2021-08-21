@@ -25,18 +25,28 @@ export class HomeComponent implements OnInit {
     fileReader.onload = () => {
       const fileData = JSON.parse(fileReader.result as string);
       if("data" in fileData) {
-        this.dataManagementService.data = fileData;
+        this.dataManagementService.data = fileData["data"];
       } else {
         alert("No data in File");
+      }
+      if("info" in fileData) {
+        this.dataManagementService.info = fileData["info"];
+      } else {
+        this.dataManagementService.info = "";
+        console.log("No information of uploaded data.")
       }
     }
     fileReader.onerror = (error) => {
       console.log(error);
+      alert("Error in uploading file.")
     }
   }
 
   sampleDataToggle(value) {
     this.isSample = value;
+    if(this.isSample) {
+      this.dataManagementService.resetToSampleData();
+    }
   }
 
   ngOnInit(): void {
