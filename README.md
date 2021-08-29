@@ -2,9 +2,13 @@
 
 ## About
 
+### Information
+
 This is a Stock Analysis and Prediction application. It analyses historical data of stocks and provides insights for predicting when to buy or sell that stock. 
 
 Users can try the application by using sample data provided within the application. Currently the sample data used is of a mutual fund owned by State Bank of India. The mutual fund is commonly known as "SBI Equity Hybrid Fund - Regular Growth".
+
+### Data Format
 
 Users also have the choice to upload their own data in the below JSON format.
 
@@ -27,6 +31,16 @@ Users also have the choice to upload their own data in the below JSON format.
 `info` is an optional attribute which specifies the information of the stock to be analyzed.
 
 `data` is an array of timestamps and relevant values of the stock which will be analyzed.
+
+## Screenshots
+
+1. **Visualization**
+
+<kbd><img src="./images/Visualization.JPG" alt="Stock Visualization" /></kbd>
+
+2. **Analysis**
+
+<kbd><img src="./images/Analysis.JPG" alt="Stock Visualization" /></kbd>
 
 ## Development
 
